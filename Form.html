@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Modern Tabbed Microsoft Forms</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Modern Microsoft Forms Tabbed Interface for ACA, Sales, Postdate, and Callbacks.">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    html, body {
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f5f7fa;
+      color: #222;
+      width: 100vw;
+      overflow: hidden;
+    }
+    .tabbed-forms-container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100vw;
+    }
+    .tab {
+      display: flex;
+      background: #f0f1f5;
+      border-bottom: 2px solid #e0e2e9;
+      box-shadow: 0 2px 4px rgba(0,0,0,.03);
+    }
+    .tab button {
+      flex: 1 1 0;
+      background: none;
+      border: none;
+      padding: 18px 0;
+      font-size: 1.1rem;
+      color: #555;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+      border-bottom: 2px solid transparent;
+      font-weight: 500;
+      letter-spacing: .5px;
+    }
+    .tab button.active {
+      color: #2179ee;
+      background: #fff;
+      border-bottom: 2px solid #2179ee;
+      font-weight: 700;
+    }
+    .tabcontent {
+      display: none;
+      flex: 1 1 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      position: relative;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .tabcontent.active {
+      display: block;
+      opacity: 1;
+    }
+    .iframe-wrapper {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+    }
+    .iframe-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #fff;
+      display: block;
+    }
+    @media (max-width: 700px) {
+      .tab button {
+        font-size: .98rem;
+        padding: 12px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="tabbed-forms-container">
+    <div class="tab" role="tablist">
+      <button class="tablinks" onclick="showForm(event, 'aca')" id="defaultOpen" role="tab" aria-controls="aca">ACA</button>
+      <button class="tablinks" onclick="showForm(event, 'sales')" role="tab" aria-controls="sales">Sales Form</button>
+      <button class="tablinks" onclick="showForm(event, 'postdate')" role="tab" aria-controls="postdate">Postdate Form</button>
+      <button class="tablinks" onclick="showForm(event, 'callback')" role="tab" aria-controls="callback">Call Back Form</button>
+    </div>
+
+    <div id="aca" class="tabcontent" role="tabpanel" aria-labelledby="defaultOpen">
+      <div class="iframe-wrapper">
+        <iframe 
+          src="https://forms.office.com/Pages/ResponsePage.aspx?id=_parGF_b8ECfroJ-aA0LcoraWTVbEktJkZzDjVnx7JdUNlI1VkNKMzE2TVBCSVVBME0zT0wxM0laUyQlQCN0PWcu&embed=true" 
+          loading="lazy" 
+          sandbox="allow-forms allow-same-origin allow-scripts allow-popups" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <div id="sales" class="tabcontent" role="tabpanel" aria-labelledby="sales">
+      <div class="iframe-wrapper">
+        <iframe 
+          src="https://forms.office.com/Pages/ResponsePage.aspx?id=_parGF_b8ECfroJ-aA0LcrORHHw3ovtGrmHCd6aIi79UMUM2OTZNSDhJS0YxN0JNQ1ZCUFhZUTVVQy4u&embed=true" 
+          loading="lazy" 
+          sandbox="allow-forms allow-same-origin allow-scripts allow-popups" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <div id="postdate" class="tabcontent" role="tabpanel" aria-labelledby="postdate">
+      <div class="iframe-wrapper">
+        <iframe 
+          src="https://forms.office.com/Pages/ResponsePage.aspx?id=_parGF_b8ECfroJ-aA0LcrORHHw3ovtGrmHCd6aIi79UNk1DODVDMDM2VklGMUY3R081NEFIMDNORy4u&embed=true" 
+          loading="lazy" 
+          sandbox="allow-forms allow-same-origin allow-scripts allow-popups" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <div id="callback" class="tabcontent" role="tabpanel" aria-labelledby="callback">
+      <div class="iframe-wrapper">
+        <iframe 
+          src="https://forms.office.com/Pages/ResponsePage.aspx?id=_parGF_b8ECfroJ-aA0LcrORHHw3ovtGrmHCd6aIi79UNFhQUU5GS0xSQkFERjZHNlJDU0VPOUQzQy4u&embed=true" 
+          loading="lazy" 
+          sandbox="allow-forms allow-same-origin allow-scripts allow-popups" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showForm(evt, formName) {
+      var tabcontent = document.getElementsByClassName('tabcontent');
+      for (var i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].classList.remove('active');
+        tabcontent[i].style.display = 'none';
+      }
+      var tablinks = document.getElementsByClassName('tablinks');
+      for (var i = 0; i < tablinks.length; i++) {
+        tablinks[i].classList.remove('active');
+      }
+      var el = document.getElementById(formName);
+      el.style.display = 'block';
+      setTimeout(() => el.classList.add('active'), 10);
+      evt.currentTarget.classList.add('active');
+    }
+
+    window.onload = function() {
+      document.getElementById('defaultOpen').click();
+    }
+  </script>
+</body>
+</html>
